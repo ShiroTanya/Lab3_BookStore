@@ -11,15 +11,23 @@
 <body>
 <th:block th:replace="layout :: header"></th:block>
 <div class="container">
-    <h1 th:text=${title}></h1>
-    <table class="table">
+
+    <div class="mb-3">
+        <form style="width: 300px" action="#" class="form-inline" id="searchForm">
+            <input type="text" class="form-control mr-2" id="searchInput" placeholder="Nhập tên sách hoặc tên tác giả">
+            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+        </form>
+    </div>
+
+    <h1> Thông tin sách</h1>
+    <table class="table" id="bookTable">
         <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Action</th>
+            <th>Mã Sách</th>
+            <th>Tên Sách</th>
+            <th>Tác giả</th>
+            <th>Giá</th>
+            <th>Loại</th>
+            <th></th>
         </tr>
         <tr th:each="book : ${books}">
             <td th:text="${book.id}"></td>
@@ -29,11 +37,29 @@
             <td th:text="${book.category}"></td>
             <td>
                 <button class="btn btn-primary"><a style="color:white;text-decoration: none" th:href="@{/books/edit/{id}(id=${book.id})}">Edit</a></button>
-                <button class="btn btn-danger"><a style="color:white;text-decoration: none" th:href="@{/books/delete/{id}(id=${book.id})}" onclick="return confirm('Bạn có chắc muốn xoá sách này?')">Delete</a>
+                <button class="btn btn-danger"><a style="color:white;text-decoration: none" th:href="@{/books/delete/{id}(id=${book.id})}" onclick="return confirm('Bạn có chắc muôn')">Delete</a></button>
             </td>
         </tr>
     </table>
 </div>
 <th:block th:replace="layout :: footer"></th:block>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#searchForm').submit(function(event) {
+            event.preventDefault(); // Prevent form submission
+            let searchText = $('#searchInput').val().toLowerCase(); // Get search text
+            $('#bookTable tr:gt(0)').each(function() { // Iterate through each row (excluding header)
+                let rowText = $(this).text().toLowerCase(); // Get text content of row
+                if (rowText.indexOf(searchText) !== -1) { // If row contains search text
+                    $(this).show(); // Show the row
+                } else {
+                    $(this).hide(); // Hide the row
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
