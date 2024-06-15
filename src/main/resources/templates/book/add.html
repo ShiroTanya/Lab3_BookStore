@@ -18,21 +18,21 @@
             <input class="form-control" type="text" th:field="*{id}" id="id" required>
         </div>
         <div class="col-6 mb-3">
-            <label class="form-label" for="title">Title: </label>
+            <label class="form-label" for="title">Tên sách: </label>
             <input class="form-control" type="text" th:field="*{title}" id="title" required minlength="2" maxlength="100">
 <!--            <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="text-danger">Thiếu tên sách</div>-->
         </div>
         <div class="col-6 mb-3">
-            <label class="form-label" for="author">Author: </label>
+            <label class="form-label" for="author">Tác giả: </label>
             <input class="form-control" type="text" th:field="*{author}" id="author" required minlength="2" maxlength="50">
         </div>
         <div class="col-6 mb-3">
-            <label class="form-label" for="price">Price: </label>
+            <label class="form-label" for="price">Giá: </label>
             <input class="form-control" type="number" th:field="*{price}" id="price" required min="0" step="0.01">
         </div>
         <div class="col-6 mb-3">
-            <label class="form-label" for="category">Category: </label>
-            <input class="form-control" type="text" th:field="*{category}" id="category" required minlength="2" maxlength="50">
+            <label class="form-label" for="category">Loại: </label>
+            <input class="form-control" th:field="*{category}" id="category" >
         </div>
         <input type="submit" class="btn btn-primary" value="Save">
     </form>
