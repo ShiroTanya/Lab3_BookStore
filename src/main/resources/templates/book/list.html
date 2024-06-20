@@ -1,58 +1,88 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Book List</title>
     <th:block th:replace="layout :: link-css"></th:block>
 </head>
 <body>
 <th:block th:replace="layout :: header"></th:block>
 <div class="container">
-    <h1 th:text=${title}></h1>
+    <h1 th:text="${title}">Book List</h1>
+
+    <div class="mb-3">
+        <form style="width: 300px" id="searchForm">
+            <input type="text" class="form-control mr-2" id="searchInput" placeholder="Nhập tên sách hoặc tác giả">
+            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+        </form>
+    </div>
+
+    <h2>Thông tin sách</h2>
+
     <table class="table">
+        <thead>
         <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Action</th>
+            <th>Mã</th>
+            <th>Tên</th>
+            <th>Tác giả</th>
+            <th>Giá</th>
+            <th>Loại</th>
+            <th></th>
         </tr>
+        </thead>
+        <tbody>
         <tr th:each="book : ${books}">
             <td th:text="${book.id}"></td>
             <td th:text="${book.title}"></td>
             <td th:text="${book.author}"></td>
             <td th:text="${book.price}"></td>
             <td th:text="${book.category.name}"></td>
-            <td >
+            <td>
                 <button class="btn btn-primary">
-                    <a style="color: white;text-decoration: none" th:href="@{/books/edit/{id}(id=${book.id})}">Edit</a>
+                    <a style="color: white; text-decoration: none;"
+                       th:href="@{/books/edit/{id}(id=${book.id})}">Edit</a>
                 </button>
                 <button class="btn btn-danger">
-                    <a style="color: white;text-decoration: none" th:href="@{/books/delete/{id}(id=${book.id})}" onclick="return confirm('Are you sure')">Delete</a>
+                    <a style="color: white; text-decoration: none;"
+                       th:href="@{/books/delete/{id}(id=${book.id})}"
+                       onclick="return confirm('Are you sure you want to delete this book?')">Delete</a>
                 </button>
                 <form th:action="@{/books/add-to-cart}" method="post" class="d-inline">
-                    <input type="hidden" name="id" th:value="${book.getId()}">
-                    <input type="hidden" name="name"
-                           th:value="${book.getTitle()}">
-                    <input type="hidden" name="price"
-                           th:value="${book.getPrice()}">
+                    <input type="hidden" name="id" th:value="${book.id}">
+                    <input type="hidden" name="name" th:value="${book.title}">
+                    <input type="hidden" name="price" th:value="${book.price}">
                     <button type="submit" class="btn btn-success"
                             onclick="return confirm('Are you sure you want to add this book to cart?')">
-                        Add to cart</button>
+                        Add to Cart
+                    </button>
                 </form>
-
-
-
             </td>
-
-
         </tr>
+        </tbody>
     </table>
 </div>
 <th:block th:replace="layout :: footer"></th:block>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#searchForm').submit(function(event) {
+            event.preventDefault(); // Prevent form submission
+            let searchText = $('#searchInput').val().toLowerCase(); // Get search text
+
+            $('.table tbody tr').each(function() { // Iterate through each table row in the tbody
+                let rowText = $(this).text().toLowerCase(); // Get text content of row
+                if (rowText.indexOf(searchText) !== -1) { // If row contains search text
+                    $(this).show(); // Show the row
+                } else {
+                    $(this).hide(); // Hide the row
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

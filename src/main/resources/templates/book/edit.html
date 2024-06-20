@@ -11,32 +11,38 @@
 <body>
 <th:block th:replace="layout :: header"></th:block>
 <div class="container">
-    <h1>Add Book</h1>
+    <h1>Cập nhật</h1>
     <form th:action="@{/books/edit}" th:object="${book}" method="post">
         <div class="col-6 mb-3">
-            <label class="form-label" for="id">ID: </label>
-            <input class="form-control" type="text" th:field="*{id}" id="id">
+            <input class="form-control" type="hidden" th:field="*{id}" id="id">
         </div>
         <div class="col-6 mb-3">
-            <label class="form-label" for="title">Title: </label>
+            <label class="form-label" for="title">Tên sách: </label>
             <input class="form-control" type="text" th:field="*{title}" id="title">
+            <span class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
         </div>
         <div class="col-6 mb-3">
-            <label class="form-label" for="author">Author: </label>
+            <label class="form-label" for="author">Tác giả: </label>
             <input class="form-control" type="text" th:field="*{author}" id="author">
+            <span class="text-danger" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
         </div>
         <div class="col-6 mb-3">
-            <label class="form-label" for="author">Price: </label>
+            <label class="form-label" for="author">Giá: </label>
             <input class="form-control" type="text" th:field="*{price}" id="price">
+            <span class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
         </div>
         <div class="col-6 mb-3">
-            <label class="form-label" for="author">Category: </label>
-            <input class="form-control" type="text" th:field="*{Category}" id="Category">
+            <label class="form-label" for="author"> Thể loại: </label>
+            <select class="form-control" id="category" name="category.id">
+                <option value="">--Chọn thể loại--</option>
+                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+            </select>
+            <span class="text-danger" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span>
         </div>
         <input type="submit" class="btn btn-primary" value="Save">
     </form>
     <br>
-    <a th:href="@{/books}">Back to list</a>
+    <a th:href="@{/books}">To List</a>
 </div>
 <th:block th:replace="layout :: footer"></th:block>
 </body>
