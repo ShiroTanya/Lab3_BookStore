@@ -1,4 +1,4 @@
-package Tuan4.PhamHoangLong.entities;
+package Tuan5.PhamHoangLong.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

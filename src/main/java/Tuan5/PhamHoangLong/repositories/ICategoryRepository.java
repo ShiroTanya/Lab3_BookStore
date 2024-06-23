@@ -1,7 +1,7 @@
-package Tuan4.PhamHoangLong.repositories;
+package Tuan5.PhamHoangLong.repositories;
 
 
-import Tuan4.PhamHoangLong.entities.Category;
+import Tuan5.PhamHoangLong.entities.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
-package Tuan4.PhamHoangLong.entities;
+package Tuan5.PhamHoangLong.entities;
 
-import Tuan4.PhamHoangLong.validators.annotation.ValidCategoryId;
+import Tuan5.PhamHoangLong.validators.annotation.ValidCategoryId;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;

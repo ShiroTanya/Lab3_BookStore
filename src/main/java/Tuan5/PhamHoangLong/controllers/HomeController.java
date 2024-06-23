@@ -1,4 +1,4 @@
-package Tuan4.PhamHoangLong.controllers;
+package Tuan5.PhamHoangLong.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,8 +1,8 @@
-package Tuan4.PhamHoangLong.services;
+package Tuan5.PhamHoangLong.services;
 
 
-import Tuan4.PhamHoangLong.entities.Category;
-import Tuan4.PhamHoangLong.repositories.ICategoryRepository;
+import Tuan5.PhamHoangLong.entities.Category;
+import Tuan5.PhamHoangLong.repositories.ICategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
